@@ -17,31 +17,48 @@
 
     <div style="margin-top:100px">
         <div class="flex-row">
-            <div class="card">
+            <div class="card" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div>To Do</div>
-                <div class="task-card"></div>
-
+                <div id="task1" class="task-card" draggable="true" ondragstart="drag(event)">Task 1</div>
+                <div id="task2" class="task-card" draggable="true" ondragstart="drag(event)">Task 2</div>
             </div>
-            <div class="card">
+            <div id="progress" class="card" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div>In Progress</div>
-
-                <div class="task-card"></div>
-                <div class="task-card"></div>
-                <div class="task-card"></div>
-
             </div>
-            <div class="card">
+            <div id="review" class="card" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div>Under Review</div>
-                <div class="task-card"></div>
-                <div class="task-card"></div>
-
             </div>
-            <div class="card">
+            <div id="finished" class="card" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div>Finished</div>
-                <div class="task-card"></div>
             </div>
         </div>
     </div>
+
 </body>
-<script src="script.js"></script>
+<script>
+    // Allow dropping items
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    // Handle dragging items
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    // Handle dropping items
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var draggedElement = document.getElementById(data);
+
+        // Check if the drop target is a valid card container
+        if (ev.target.classList.contains("card")) {
+            ev.target.appendChild(draggedElement);
+        } else if (ev.target.classList.contains("task-card")) {
+            // If dropped on a task card, append to the parent container
+            ev.target.parentElement.appendChild(draggedElement);
+        }
+    }
+</script>
 </html>
