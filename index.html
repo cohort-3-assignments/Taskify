@@ -19,21 +19,71 @@
         <div class="flex-row">
             <div id="todo" class="card" id="todo">
                 <div class="card-name">To Do</div>
+                <button class="addTask">Add Task</button>
             </div>
             <div id="inprogress" class="card">
                 <div class="card-name">In Progress</div>
+                <button class="addTask">Add Task</button>
             </div>
             <div id="underreview" class="card">
                 <div class="card-name">Under Review</div>
+                <button class="addTask">Add Task</button>
             </div>
             <div id="finished" class="card">
                 <div class="card-name">Finished</div>
+                <button class="addTask">Add Task</button>
             </div>
         </div>
     </div>
 
-</body>
-    <script src="./script.js" type="module">
 
-    </script>
+    <div class="dialog">
+        <div class="dialog-content">
+            <button class="close-button">X</button>
+            <div class="dialog-header">
+                <h2>Add New Task </h2>
+                <div style="margin-top: 10px; font-size: 14px;">
+                    Task Type:
+                    <span id="task-type" style="font-weight: bold;">
+
+                    </span>
+                </div>
+            </div>
+            <form class="task-form">
+                <div class="form-group" id="title-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group" id="description-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                <div class="form-group" id="tag-group">
+                    <label for="tag">Tag:</label>
+                    <select id="tag" name="tag" required>
+                        <option value="">Select Tag</option>
+                        <option value="UI_UX">UI/UX</option>
+                        <option value="Backend">Backend</option>
+                        <option value="API">API</option>
+                        <option value="Content">Content</option>
+                        <option value="Testing">Testing</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="Documentation">Documentation</option>
+                    </select>
+                </div>
+                <div class="form-group" id="date-group">
+                    <label for="date">Due Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <button type="submit" id="newTask">Add Task</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+<script src="./script.js" type="module">
+
+</script>
+
 </html>

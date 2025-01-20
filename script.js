@@ -73,6 +73,16 @@ const tagColors = {
     Documentation: "#2ECC71"
 };
 
+
+function clearForm() {
+    document.querySelector("#title").value = "";
+    document.querySelector("#description").value = "";
+    document.querySelector("#tag").value = "";
+    document.querySelector("#date").value = "";
+    document.querySelector("#task-type").innerText = "";
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const cardContainers = document.querySelectorAll(".card");
 
@@ -105,4 +115,61 @@ document.addEventListener("DOMContentLoaded", function () {
         // Attach dragstart event to task card
         taskCard.addEventListener("dragstart", drag);
     });
+
+    // Add event listener to open dialog button
+    document.querySelectorAll(".addTask").forEach((button) => {
+        button.addEventListener("click", () => {
+            const parent = button.parentElement;
+            document.querySelector("#task-type").textContent = parent.id;
+
+            document.querySelector(".dialog").style.display = "block";
+        });
+    })
+
+    document.querySelector('.close-button').addEventListener('click', () => {
+        document.querySelector('.dialog').style.display = 'none';
+    })
+
+    document.querySelector('#newTask').addEventListener("click", (e) => {
+
+        e.preventDefault();
+        const title = document.querySelector('#title').value;
+        const description = document.querySelector('#description').value;
+        const tag = document.querySelector('#tag').value;
+        const date = document.querySelector('#date').value;
+        const state = document.querySelector("#task-type").innerText.toLowerCase();
+
+        const newTask = {
+            id: tempTaskData.length + 1,
+            title,
+            description,
+            tag,
+            date,
+            state
+        }
+
+        tempTaskData.push(newTask);
+
+        // console.log(newTask);
+
+        clearForm();
+
+
+
+        const taskCard = createTask(newTask.id, newTask.title, newTask.description, newTask.tag, newTask.date);
+        const cardContainer = document.getElementById(newTask.state);
+
+        if (cardContainer) {
+            cardContainer.appendChild(taskCard);
+        }
+
+        taskCard.addEventListener("dragstart", drag);
+
+        document.querySelector('.dialog').style.display = 'none';
+    
+    })
+            
+
 });
+
+
